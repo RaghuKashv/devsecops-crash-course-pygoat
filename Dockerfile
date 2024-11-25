@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y \
 EXPOSE 80
 
 # Define environment variable
-# ENV NAME World
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
