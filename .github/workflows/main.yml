@@ -58,7 +58,16 @@ jobs:
       - name: Docker Scout Scan
         uses: docker/scout-action@v1.0.9
         with:
-          dockerhub-user: ${{ secrets.REPo_USER }}
+          dockerhub-user: ${{ secrets.REPO_USER }}
           dockerhub-password: ${{ secrets.REPO_PWD }}
-          command: quickview, cves
+          command: quickview,cves
+          only-severities: critical,high
+          sarif-file: scout-report.sarif
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: docker-scout-findings
+          path: scout-report.sarif
         
